@@ -10,7 +10,7 @@
  */
 class Solution {
 public:
-    ListNode * mergeTwoLists(ListNode* a,ListNode* b){
+    /*ListNode * mergeTwoLists(ListNode* a,ListNode* b){
      if(!a) return b;
         if(!b) return a;
          if(a->val <= b->val)
@@ -24,9 +24,9 @@ public:
         }
         
        
-        }
+        }*/
      
-    /*ListNode* mergeTwoLists(ListNode* a, ListNode* b){
+    ListNode* mergeTwoLists(ListNode* a, ListNode* b){
         if(a==NULL) return b;
         if(b==NULL) return a;
         ListNode* head=NULL;
@@ -41,7 +41,7 @@ public:
             
         }
         return head;
-    }*/
+    }
     
     ListNode* mergeKLists(vector<ListNode*>& lists) {
         if(lists.size()==0){
