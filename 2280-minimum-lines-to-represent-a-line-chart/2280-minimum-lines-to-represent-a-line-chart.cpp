@@ -25,10 +25,11 @@ public:
         auto m=(long double)(a/b);
         int c=1;
      cout<<m<<" ";
-        for(int i=2;i<stockPrices.size();i++)
+        for(int i=1;i<stockPrices.size()-1;i++)
         {
-            auto x=(long double)(stockPrices[i][1]-stockPrices[i-1][1])/(stockPrices[i][0]-stockPrices[i-1][0]);
-            //auto x=(long double)(e/d);
+            auto e=(long double)(stockPrices[i+1][1]-stockPrices[i][1]);
+            auto d=(long double) (stockPrices[i+1][0]-stockPrices[i][0]);
+            auto x=(long double)(e/d);
             if(m!=x)
             {
                 c++;
