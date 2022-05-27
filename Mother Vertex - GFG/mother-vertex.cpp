@@ -22,22 +22,23 @@ class Solution
 	int findMotherVertex(int V, vector<int>adj[])
 	{
 	    // Code here
-	    
+	    int v=0;
+	    vector<int> vis(V,0);
 	    for(int i=0;i<V;i++){
-	       vector<int> vis(V,0);
+	        if(!vis[i]){
 	       dfs(i,vis,adj);
-	       int flag=0;
+	       v=i;
+	        }
 	       
-	       for(int j=0;j<V;j++){
-	           if(vis[j]==0)
-	           flag=1;
-	         //  cout<<vis[j]<<" ";
-	       }
-	      
-	       if(flag==0)
-	        return i;
 	    }
-	    return -1;
+	       
+	     fill(vis.begin(),vis.end(),0);
+	     dfs(v,vis,adj);
+	     for(int i=0;i<V;i++)
+	        if(vis[i]==0)
+	            return -1;
+	    
+	    return v;
 	}
 
 };
