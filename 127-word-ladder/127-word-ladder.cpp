@@ -1,44 +1,45 @@
 class Solution {
 public:
     int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
-        unordered_set<string> myset;
-        bool isPresent=false;
-        for(auto it:wordList){
-            if(endWord==it)
-                isPresent=true;
-            myset.insert(it);
-            
-        }
-        if(isPresent==false)
+        unordered_map<string,int> mp;
+        for(int i=0;i<wordList.size();i++){
+            mp[wordList[i]]++;
+            }
+        if(mp.find(endWord)==mp.end())
             return 0;
         
         queue<string> q;
         q.push(beginWord);
-        int d=0;
-        
+        int ans =0;
+        int dist=1;
         while(!q.empty()){
-            d++;
-            int ls=q.size();
-            while(ls--){
-                string curr=q.front();
-                q.pop();
+            dist++;
+            cout<<dist<< " "<< ans<<" ";
+            int len=q.size();
+            for(int x=0;x<len;x++){
+            string t=q.front();
+            q.pop();
                 
-                for(int i=0;i<curr.length();i++){
-                    string temp =curr;
-                    for(char c='a';c<='z';c++){
-                        temp[i]=c;
-                        if(curr==temp)
-                            continue;
-                        if(temp==endWord)
-                            return d+1;
-                        if(myset.find(temp)!=myset.end()){
-                            q.push(temp);
-                            myset.erase(temp);
+            for(int i=0;i<beginWord.length();i++){
+                string temp=t;
+                for(char a='a';a<='z';a++){
+                    temp[i]=a;
+                   
+                    if(mp.find(temp)!=mp.end()){
+                         cout<<temp<<" ";
+                        if(temp==endWord){
+                            ans=max(ans,dist);
+                            return ans;
                         }
+                        q.push(temp);
+                        mp.erase(temp);
                     }
                 }
             }
         }
-        return 0;
+          //  dist++;
+    }
+        return ans;
+        
     }
 };
