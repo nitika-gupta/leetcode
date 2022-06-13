@@ -7,33 +7,30 @@ public:
         int mx=INT_MIN;
         unordered_map<int,int> mp;
         while(i<nums.size()){
-           
             mp[nums[i]]++;
             sum+=nums[i];
-           
+            //cout<<sum<<endl;
             if(mp.size()==(i-j+1)){
-               
+                //cout<<sum<<"*"<<endl;
                 mx=max(mx,sum);
                 i++;
             }
             else if(mp.size()<(i-j+1)){
-                while(mp.size()<(i-j+1)){
+                while(mp.size()<i-j+1){
                     mp[nums[j]]--;
                     sum-=nums[j];
                     if(mp[nums[j]]==0){
                         mp.erase(nums[j]);    
                     }
-                    
-                                  
+                                        
                     j++;
                     
                 }
-                
-             i++;    
+                 i++;
             }
-            
+           
         }
-   
+       
         return mx;
         
     }
