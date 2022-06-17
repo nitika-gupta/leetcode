@@ -10,73 +10,39 @@ class Solution
     vector<int> spirallyTraverse(vector<vector<int> > matrix, int r, int c) 
     {
         // code here 
-            vector<int> vec;
-        int rowbegin=0; 
-        int rowEnd = matrix.size()-1;
-        int colBegin=0;
-        int colEnd = matrix[0].size()-1;
-         int count =0;
-         int size=r*c;
-        while(rowbegin<=rowEnd &&  colBegin<=colEnd){
-            if(count< size)
-            for(int i=colBegin;i<=colEnd; i++){
-                vec.push_back(matrix[rowbegin][i]);
+        int row=0,col=0;
+        int count=0;
+        vector<int> res;
+        int right=c-1,down=r-1,left=0,top=0;
+        while(count< r*c &&  top<=down  ||  left<=right){
+            if(count<r*c)
+            for(int i=left;i<=right;i++){
+                res.push_back(matrix[top][i]);
                 count++;
             }
-            rowbegin++;
-            if(count< size)
-            for(int j =rowbegin; j<=rowEnd;j++){
-               // vec.push_back(matrix[colEnd][j]);
-               vec.push_back(matrix[j][colEnd]);
-               count++;
-                //j,colend
-            }
-            colEnd--;
-            if(count< size)
-            for(int i=colEnd;i>=colBegin;i--){
-                vec.push_back(matrix[rowEnd][i]);
+            top++;
+            if(count<r*c)
+            for(int i=top;i<=down;i++){
+                res.push_back(matrix[i][right]);
                 count++;
             }
-            rowEnd--;
-            if(count< size)
-            for(int j=rowEnd;j>=rowbegin;j--){
-                vec.push_back(matrix[j][colBegin]);
+            right--;
+            if(count<r*c)
+            for(int i=right;i>=left;i--){
+                res.push_back(matrix[down][i]);
                 count++;
             }
-            colBegin++;
+            down--;
+            if(count<r*c)
+            for(int i=down;i>=top;i--){
+                res.push_back(matrix[i][left]);
+                count++;
+            }
+            left++;
+            
         }
-        return vec;
-        
-       /* vector<int> vec;
-        int rowbegin=0; 
-        int rowEnd = matrix.size()-1;
-        int colBegin=0;
-        int colEnd = matrix[0].size()-1;
-        
-        while(rowbegin<=rowEnd && colBegin <= colEnd){
-            for(int i=colBegin;i<=colEnd; i++){
-                vec.push_back(matrix[i][rowbegin]);
-            }
-            rowbegin++;
-            
-            for(int j =rowbegin; j<=rowEnd;j++){
-                vec.push_back(matrix[colEnd][j]);
-            }
-            colEnd--;
-            
-            for(int i=colEnd;i>=colBegin;i--){
-                vec.push_back(matrix[i][rowEnd]);
-            }
-            rowEnd--;
-            
-            for(int j=rowEnd;j>=rowbegin;j--){
-                vec.push_back(matrix[j][colBegin]);
-            }
-            colBegin++;
-        }
-        return vec;*/
+        return res;
     }
-    
 };
 
 // { Driver Code Starts.
