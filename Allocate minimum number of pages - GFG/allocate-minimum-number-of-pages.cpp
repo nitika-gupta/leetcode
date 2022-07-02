@@ -28,10 +28,10 @@ class Solution
         
        
     }
-    //  if(student>k)
-    //         return false;
-    // return true;
-    return student<=k;
+     if(student>k)
+            return false;
+    return true;
+    //return student<=k;
     
 }
     int findPages(int A[], int N, int k) 
