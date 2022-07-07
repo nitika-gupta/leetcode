@@ -107,37 +107,40 @@ class Solution
     vector<int> topView(Node *root)
     {
         //Your code here
-         vector<vector<int>> res;
-        map<int,vector<int>> mp;
-        queue<pair<Node*,pair<int,int>>> q;
-        q.push({root,{0,0}});
+        if(root==NULL)
+            return {};
+        map<int,int> mp;
+        vector<int> res;
+        queue<pair<Node*,int>> q;
+        q.push({root,0});
         
         while(!q.empty()){
-            int n=q.size();
-            for(int i=0;i<n;i++){
-                Node* temp=q.front().first;
-                int r=q.front().second.first;
-                int c=q.front().second.second;
+            
+            int len = q.size();
+            
+            for(int i=0;i<len;i++){
                 
+                Node* x = q.front().first;
+                int y = q.front().second;
+                //cout<<y<<" ";
                 q.pop();
-                mp[r].push_back(temp->data);
-                if(temp->left)
-                q.push({temp->left,{r-1,c+1}});
-                if(temp->right)
-                q.push({temp->right,{r+1,c+1}} );
+                
+                if(mp.find(y)==mp.end()){
+                    mp.insert({y,x->data});
+                   // res.push_back(x->data);
+                }
+                if(x->left!=NULL){
+                    q.push({x->left,y-1});
+                }
+                if(x->right!=NULL){
+                    q.push({x->right,y+1});
+                }
             }
         }
-        
-        for(auto it:mp){
+        for(auto it : mp){
             res.push_back(it.second);
         }
-        vector<int> ans;
-        for(int i=0;i<res.size();i++){
-                int x=res[i][0];
-                ans.push_back(x);
-            }
-        
-        return ans;
+        return res;
     }
 
 };
