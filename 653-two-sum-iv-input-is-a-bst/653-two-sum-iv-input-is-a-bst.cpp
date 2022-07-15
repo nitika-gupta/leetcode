@@ -11,33 +11,30 @@
  */
 class Solution {
 public:
-    
-  void  inorder(TreeNode* root, vector<int> & v){
-        if(root==NULL){
-            return;
-        }
-         
-        inorder(root->left,v);
-        v.push_back(root->val);
-        inorder(root->right,v);
-    }   
-    bool findTarget(TreeNode* root, int k) {
-        vector<int> v;
+    TreeNode* solve(TreeNode* root, int k, unordered_map<int,int> &mp){
         
-        inorder(root,v);
-        int i=0;
-        int j =v.size()-1;
-        while(i<j){
-            if(v[i]+v[j]==k){
-                return true;
-            }
-            if((v[i] +v[j])>k){
-                j--;
-            }
-            if((v[i]+v[j])<k){
-                i++;
-            }
+        if(root==NULL)
+            return NULL;
+        
+        TreeNode* lft = solve(root->left, k,mp);
+        if(lft!=NULL)
+            return lft;
+        if(mp.find(root->val)!=mp.end())
+            return root;
+        else{
+            mp[k-root->val]++;
+            
         }
-        return false;
+        return solve(root->right,k,mp);
+        
+    }
+    bool findTarget(TreeNode* root, int k) {
+        
+        unordered_map<int,int> mp;
+        TreeNode* res=solve(root,k,mp);
+        if(res==NULL)
+            return false;
+        return true;
+        
     }
 };
