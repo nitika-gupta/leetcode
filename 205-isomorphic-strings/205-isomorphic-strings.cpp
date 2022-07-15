@@ -6,7 +6,7 @@ public:
         {
             return false;
         }
-        unordered_map<char,int>mp1,mp2;
+        unordered_map<char,char>mp1,mp2;
         int n=s.size();
         for(int i=0;i<n;i++)
         {
